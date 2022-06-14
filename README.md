@@ -59,7 +59,11 @@ cp -R ../my-old-remix-app/app app
 ### Connecting to StoryBlok v2 Visual Studio
 In order to view the components in the storyBlok v2 visual studio, you need to proxy the http server through an https server since storyBlok v2 only support https requests. To start the proxy server, use the command below.
 
-`npm run start:proxy`
+```
+npm run start:proxy
+npm run clean:proxy
+
+```
 
 The proxy server will be started on `<hostname>:3000` or `0.0.0.0:3000` when running on localhost.
 

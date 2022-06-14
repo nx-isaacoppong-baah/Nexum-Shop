@@ -7,3 +7,5 @@ node_modules
 .env.ts
 
 ssl-proxy-linux-amd64
+
+certificates
