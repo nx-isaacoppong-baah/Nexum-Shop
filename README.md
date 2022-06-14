@@ -49,3 +49,18 @@ rm -rf app
 # copy your app over
 cp -R ../my-old-remix-app/app app
 ```
+
+### Setting the Environment
+- Rename the file `example.env.ts` to `.env.ts`
+- Replace "your-preview-token" with the actual token from storyBlok
+
+**NB: Make sure the .env.ts is added to the gitignore file**
+
+### Connecting to StoryBlok v2 Visual Studio
+In order to view the components in the storyBlok v2 visual studio, you need to proxy the http server through an https server since storyBlok v2 only support https requests. To start the proxy server, use the command below.
+
+`npm run start:proxy`
+
+The proxy server will be started on `<hostname>:3000` or `0.0.0.0:3000` when running on localhost.
+
+**NB: This proxy server is only used for development purposes. The certificates are not signed and secured from a trusted source**

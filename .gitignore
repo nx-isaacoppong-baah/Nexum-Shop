@@ -4,3 +4,6 @@ node_modules
 /build
 /public/build
 .env
+.env.ts
+
+ssl-proxy-linux-amd64
