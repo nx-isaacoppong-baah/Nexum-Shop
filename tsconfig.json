@@ -1,5 +1,5 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", ".env.ts"],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", ".env.ts", "app/routes/Main-product/$productSlug.tsx"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "isolatedModules": true,
@@ -16,7 +16,7 @@
       "~/*": ["./app/*"],
       "*": ["@types", "@types/*/types"]
     },
-
+    "experimentalDecorators": true,
     // Remix takes care of building everything in `remix build`.
     "noEmit": true
   }

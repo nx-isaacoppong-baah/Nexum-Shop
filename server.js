@@ -34,6 +34,9 @@ app.all(
         return createRequestHandler({
           build: require(BUILD_DIR),
           mode: process.env.NODE_ENV,
+          getLoadContext(req, res) {
+              return { user: "isaac.oppong-baah" }
+          }
         })(req, res, next);
       }
     : createRequestHandler({
@@ -41,7 +44,7 @@ app.all(
         mode: process.env.NODE_ENV,
       })
 );
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3010;
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);

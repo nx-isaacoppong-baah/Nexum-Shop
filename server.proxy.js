@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require("path");
 
 const platform = process.platform;
-const httpHost = "127.0.0.1:3000";
-const httpsHost = "0.0.0.0:3010";
+const httpHost = "127.0.0.1:3010";
+const httpsHost = "0.0.0.0:3000";
 const certificatePath = path.join(__dirname, "certificates");
 const publicKeyPath = path.join(certificatePath, "cert.pem");
 const privateKeyPath = path.join(certificatePath, "key.pem");
@@ -58,7 +58,7 @@ let filename, filepath;
 
 	if (commands.length > 0) {
 		const command = commands.join(" && ");
-
+		console.log(command);
 		childProcess.execSync(command, {
 			cwd: process.cwd(),
 			env: process.env,
