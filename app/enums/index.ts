@@ -10,6 +10,7 @@ export enum StoriesEndpoints {
 
 export enum Themes {
 	dark = "dark",
-	light = "light"
+	light = "light",
+	system = "system"
 }
 

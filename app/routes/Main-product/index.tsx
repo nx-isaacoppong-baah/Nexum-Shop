@@ -7,21 +7,21 @@ import type {
 	AllProductsResponseRawData,
 	IProductStoryContent,
 	Story,
-	IStoryContent,
 	StoryAPIQueryParams
-} from "../../types";
+} from "~/types";
 
 import {
 	StoryVersions,
 	StoriesEndpoints
-  } from "../../enums";
+  } from "~/enums";
 
-import { refineEndpoint } from "../../scripts/utils/endpoints";
+import Utilities from "~/scripts/utils";
+import StoryHelpers from "~/scripts/helpers/story";
 
-import { ProductListing } from "../../folders/ProductListing";
+import { ProductListing } from "~/folders/ProductListing";
 
 export const loader: LoaderFunction = async () => {
-	const path: string = refineEndpoint(StoriesEndpoints.__init__);
+	const path: string = Utilities.removeTrailingSlash(StoriesEndpoints.__init__);
 	const sbApiOptions: StoryAPIQueryParams = {
 		starts_with: "Main-product",
 		version: StoryVersions.draft
@@ -38,16 +38,9 @@ export const loader: LoaderFunction = async () => {
 
 	// map the story content of the response data
 	stories = stories.map(story => {
-		const mappedStoryContent: Partial<IStoryContent<IProductStoryContent>> = {
-			blok: {
-				...story.content
-			}
-		}
-
-		story.content = mappedStoryContent;
+		story.content = StoryHelpers.mapStoryContent<IProductStoryContent>(story);
 		return story;
 	});
-
 
 	return json(stories);
 }

@@ -1,5 +1,5 @@
 import { storyblokEditable } from "@storyblok/react";
-import type { IProductStoryContent, IStoryContent } from "../types";
+import type { IProductStoryContent, IStoryContent } from "../../types";
 
 export const Product = ({ blok }: IStoryContent<IProductStoryContent>): JSX.Element => {
   return (

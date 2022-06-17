@@ -7,11 +7,12 @@ import { storyblokInit, apiPlugin } from "@storyblok/react";
 import { Document } from "./document";
 import theme from "./theme";
 
-import { Feature } from "./components/Feature";
-import Grid from "./components/Grid";
-import Page from "./components/Page";
-import { Teaser } from "./components/Teaser";
-import { Product } from "./components/Product";
+import { Feature } from "./components/nested/Feature";
+import { Grid } from "./components/nested/Grid";
+import { Teaser } from "./components/nested/Teaser";
+import { Page } from "./components/content-types/Page";
+import { Product } from "./components/content-types/Product";
+import { Logos } from "./components/nested/Logos";
 
 import { process } from "../.env";
 
@@ -41,7 +42,8 @@ const components = {
   grid: Grid,
   teaser: Teaser,
   page: Page,
-  Product: Product
+  Product: Product,
+  logos: Logos
 }
 
 storyblokInit({

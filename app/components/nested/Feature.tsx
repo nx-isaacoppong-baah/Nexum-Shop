@@ -7,7 +7,7 @@ import {
   Heading,
   Text,
   Center
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 export const Feature: FC<FeatureComponentProps> = ({ blok }: FeatureComponentProps): JSX.Element => {
   return (

@@ -20,6 +20,7 @@ export type {
 export type {
 	Story,
 	IStoryContent,
+	IBasicStoryFields
 } from "./story";
 
 export type { IImageFieldType } from "./field";
@@ -34,9 +35,13 @@ export type {
 	FeatureComponentProps,
 	ITeaserComponent,
 	TeaserComponentProps,
-	RefinedLogos,
+	IRefinedLogos,
 	LogoComponentProps,
-	ILogoComponent
+	ILogoComponent,
+	GridComponentProps,
+	IGridComponent,
+	PageComponentProps,
+	HeaderComponentProps
 } from "./component";
 
 export interface ServerStyleContextData {
