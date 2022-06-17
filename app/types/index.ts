@@ -38,3 +38,17 @@ export type {
 	LogoComponentProps,
 	ILogoComponent
 } from "./component";
+
+export interface ServerStyleContextData {
+	key: string
+	ids: Array<string>
+	css: string
+}
+
+export interface ClientStyleContextData {
+	reset: () => void
+}
+
+export interface DocumentProps {
+	children: React.ReactNode;
+}
