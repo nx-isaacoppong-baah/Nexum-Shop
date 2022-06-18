@@ -11,6 +11,7 @@ export type LogoComponentProps = {
 }
 
 export interface IFeatureComponent extends IBasicStoryFields {
+	id: string
 	name: string
 	title: string
 	description: string

@@ -12,7 +12,7 @@ import { Header } from "../internal/Header";
 export const Page: FC<PageComponentProps> = ({ blok }: PageComponentProps): JSX.Element => {
 	const links = ["Partners", "Products", "Blog", "FAQ"];
 
-  const { logoComponent, about, teaser } = ComponentHelpers.processHomepageBloks(blok.body);
+  let { logoComponent, features, teaser } = ComponentHelpers.processHomepageBloks(blok.body);
   const refinedImages = ComponentHelpers.refineImages(logoComponent.logos);
   const refinedLogos = ComponentHelpers.refineLogoComponent(logoComponent, refinedImages);
 
@@ -26,7 +26,11 @@ export const Page: FC<PageComponentProps> = ({ blok }: PageComponentProps): JSX.
         {/* Main */}
         <Box p={4}>
             <StoryblokComponent blok = { teaser } />
-            <StoryblokComponent blok = { about } />
+            {
+              Array.from(features.values()).map((feature) => (
+                <StoryblokComponent blok = { feature } key = { feature._uid } />
+              ))
+            }
         </Box>
 
         {/* Footer */}

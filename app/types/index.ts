@@ -8,6 +8,8 @@ export type StoryAPIQueryParams = {
 	sort_by?: string // eg: content.YOUR_FIELD:asc || created_at:desc
 	page?: number // for pagination, default is 1
 	per_page?: number // for pagination, default is 25 and max is 100
+	language?: string
+	fallback_lang?: string
 }
 
 export type {

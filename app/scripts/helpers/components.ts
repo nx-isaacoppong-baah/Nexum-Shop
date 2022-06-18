@@ -9,13 +9,14 @@ import type {
 import { Themes } from "~/enums";
 
 export default class ComponentHelpers {
+	static features: Map<string, IFeatureComponent> = new Map();
+
 	public static processHomepageBloks(bloks: Array<IBasicStoryFields
 	| ILogoComponent
 	| IFeatureComponent
-	| ITeaserComponent>): { logoComponent: ILogoComponent, about
-	: Partial<IFeatureComponent>, teaser: Partial<ITeaserComponent> } {
+	| ITeaserComponent>): { logoComponent: ILogoComponent, features
+	: Map<string, IFeatureComponent>, teaser: Partial<ITeaserComponent> } {
 		let logoComponent: ILogoComponent = { logos: [] };
-		let about: Partial<IFeatureComponent> = {};
 		let teaser: Partial<ITeaserComponent> = {};
 
 		for (let blok of bloks) {
@@ -29,11 +30,11 @@ export default class ComponentHelpers {
 			}
 
 			if (blok.component.toLowerCase() === "feature") {
-				about = this.processHomepageFeature(blok as IFeatureComponent);
+				this.processHomepageFeature(blok as IFeatureComponent);
 			}
 		}
 
-		return { logoComponent, about, teaser }
+		return { logoComponent, features: this.features, teaser }
 	}
 
 	public static refineImages(images: IImageFieldType[]): Pick<IRefinedLogos, "light" | "dark"> {
@@ -79,17 +80,15 @@ export default class ComponentHelpers {
 	}
 
 	private static processHomepageTeaser (blok: ITeaserComponent) {
-		return this.transformBasicBlok(blok, (basicBlok: IBasicStoryFields) => {
+		return this.transformBasicBlok(blok, (_: IBasicStoryFields) => {
 			return blok;
 		});
 	}
 
 	private static processHomepageFeature (blok: IFeatureComponent) {
-		return this.transformBasicBlok(blok, (basicBlok: IBasicStoryFields) => {
+		this.transformBasicBlok(blok, (basicBlok: IBasicStoryFields) => {
 			const specificBlok = basicBlok as IFeatureComponent;
-			if (specificBlok.name.toLowerCase() === "about") {
-				return blok;
-			}
+			this.features.set(specificBlok.id.toLowerCase(), blok);
 		});
 	}
 
