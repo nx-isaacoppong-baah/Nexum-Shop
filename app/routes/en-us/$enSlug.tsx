@@ -1,42 +1,18 @@
 import { json } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import {
-  getStoryblokApi,
-  useStoryblokState,
-  StoryblokComponent
-} from "@storyblok/react";
-
-import Utilities from "~/scripts/utils";
-import StoryHelpers from "~/scripts/helpers/story";
-
-import {
-	StoryVersions,
-	StoriesEndpoints,
-} from "~/enums";
-
-import type {
-  StoryAPIQueryParams,
-  PageResponseRawData,
-  IPageStoryContent,
-  Story
-} from "~/types";
+import { useStoryblokState, StoryblokComponent } from "@storyblok/react";
+import { StoryVersions } from "~/enums";
+import type { StoryAPIQueryParams, Story } from "~/types";
+import LoaderHelper from "~/scripts/helpers/loader";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const slug = params?.slug ?? "homepage";
-  const endpoint: string = Utilities.removeTrailingSlash(StoriesEndpoints.__init__);
-  const path: string = `${endpoint}/${slug}`;
   const sbApiOptions: StoryAPIQueryParams = {
     version: StoryVersions.draft
   };
 
-  let response = await getStoryblokApi().get<PageResponseRawData>(path, sbApiOptions);
-  if (!response.data) {
-    throw new Response("Not Found", { status: 404 });
-  }
-
-  const story: Story = response.data.story;  
-  story.content = StoryHelpers.mapStoryContent<IPageStoryContent>(story);
+  const story = await LoaderHelper.processHomepageLoader(slug, sbApiOptions);
 
   return json(story);
 };
