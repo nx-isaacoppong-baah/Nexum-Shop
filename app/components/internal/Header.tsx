@@ -3,11 +3,12 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 import type { HeaderComponentProps } from "~/types";
 import { Themes } from "~/enums";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { NavLink } from "~/components/internal/NavLink";
 
 import CookieUtilities from "~/scripts/utils/cookies";
 import { CountrySelector } from "./CountrySelector";
+import constants from "~/scripts/utils/constants";
 
 import {
   Box,
@@ -36,7 +37,7 @@ export const Header: FC<HeaderComponentProps> = ({ logos, links }: HeaderCompone
 
 	useEffect(() => {
 		const cookieUtilities = new CookieUtilities();
-		const locale = cookieUtilities.getValue("locale");
+		const locale = cookieUtilities.getValue(constants.locale);
 
 		if (locale) {
 			getSelectedLocale(locale);
@@ -48,19 +49,12 @@ export const Header: FC<HeaderComponentProps> = ({ logos, links }: HeaderCompone
 	return (
 	<>
 		<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-			<IconButton
-				size={"md"}
-				icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-				aria-label={"Open Menu"}
-				display={{ md: "none" }}
-				onClick={isOpen ? onClose : onOpen}
+			<IconButton size={"md"} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+				aria-label={"Open Menu"} display={{ md: "none" }} onClick={isOpen ? onClose : onOpen}
 			/>
 			<HStack spacing={8} alignItems={"center"}>
 				<StoryblokComponent blok = { logos } />
-				<HStack
-					as={"nav"}
-					spacing={4}
-					display={{ base: "none", md: "flex" }}>
+				<HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
 					{
 						Array.from(links.values()).map((link) => (
 							<NavLink key = { link._uid } link = { link }> { link } </NavLink>
@@ -70,6 +64,9 @@ export const Header: FC<HeaderComponentProps> = ({ logos, links }: HeaderCompone
 			</HStack>
 			<Flex alignItems={"center"}>
 				<CountrySelector selectedLocale={selectedLocale} rendered={rendered} />
+				<Button onClick={toggleColorMode}>
+					{ colorMode === Themes.light ? <MoonIcon w={6} h={6} /> : <SunIcon w={6} h={6} /> }
+				</Button>
 				<Menu>
 					<MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
 						<Avatar size={"sm"} src={ "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib="
@@ -77,9 +74,7 @@ export const Header: FC<HeaderComponentProps> = ({ logos, links }: HeaderCompone
 					</MenuButton>
 					<MenuList>
 						<MenuItem>
-							<Button onClick={toggleColorMode}>
-								{colorMode === Themes.light ? Themes.dark : Themes.light} Mode
-							</Button>
+
 						</MenuItem>
 						<MenuDivider />
 					</MenuList>

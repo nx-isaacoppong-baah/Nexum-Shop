@@ -10,6 +10,7 @@ import type {
   IPageStoryContent,
   Story
 } from "~/types";
+import constants from "../utils/constants";
 
 export default class LoaderHelper {
 	public static async processHomepageLoader(slug: string, queries: StoryAPIQueryParams)
@@ -40,7 +41,7 @@ export default class LoaderHelper {
 		let cookie: string | null = null;
 	  
 		if (cookieHeader) {
-		  cookie = cookieUtilities.getValue("locale", cookieHeader);
+		  cookie = cookieUtilities.getValue(constants.locale, cookieHeader);
 		}
 
 		return cookie;

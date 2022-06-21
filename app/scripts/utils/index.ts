@@ -1,9 +1,43 @@
-export default class Utilities {
-	public static removeTrailingSlash = (endpoint: string): string => {
-		if (endpoint.endsWith("/")) {
-		  return endpoint.substring(0, endpoint.lastIndexOf("/"))
+export default class UtilityFactory {
+	/**
+	 * Algorithm to remove trailing slashes from urls
+	 * @param url the string
+	 * @returns the refined url
+	 */
+	public static removeTrailingSlash = (url: string): string => {
+		if (url.endsWith("/")) {
+		  return url.substring(0, url.lastIndexOf("/"));
 		}
 	
-		return endpoint;
+		return url;
+	}
+
+	/**
+	 * Algorithm to find common elements in two arrays
+	 * @param arrayOne First array
+	 * @param arrayTwo Second array
+	 * @returns the common elements
+	 */
+	public static findCommonElements (arrayOne: any[], arrayTwo: any[]) {
+		let commonElementsDictionary = new Map<string, boolean>();
+		let commonElements = [];
+	
+		for (let i = 0; i < arrayOne.length; i++) {
+			let element = arrayOne[i];
+	
+			if(!commonElementsDictionary.get(element)) {
+				commonElementsDictionary.set(element, true);
+			}
+		}
+			
+		for (let j = 0; j < arrayTwo.length ; j++) {
+			let element = arrayTwo[j];
+	
+			if(commonElementsDictionary.get(element)) {
+				commonElements.push(element);
+			}
+		}
+	
+		return commonElements;
 	}
 }

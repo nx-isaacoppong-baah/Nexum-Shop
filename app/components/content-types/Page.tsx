@@ -17,7 +17,7 @@ export const Page: FC<PageComponentProps> = ({ blok }: PageComponentProps): JSX.
   return (
     <>
         {/* Header */}
-        <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+        <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
           <Header links = { refinedLinks } logos = { refinedLogos } />
         </Box>
 

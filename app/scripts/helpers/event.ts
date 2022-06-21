@@ -1,32 +1,11 @@
 import type { ChangeEvent } from "react";
 import type { IBrowserUtilities } from "~/types";
- 
-const findCommonElements = (arrayOne: any[], arrayTwo: any[]) => {
-    let commonElementsDictionary = new Map<string, boolean>();
-    let commonElements = [];
-
-    for (let i = 0; i < arrayOne.length; i++) {
-        let element = arrayOne[i];
-
-        if(!commonElementsDictionary.get(element)) {
-            commonElementsDictionary.set(element, true);
-        }
-    }
-        
-    for (let j = 0; j < arrayTwo.length ; j++) {
-        let element = arrayTwo[j];
-
-        if(commonElementsDictionary.get(element)) {
-            commonElements.push(element);
-        }
-    }
-
-    return commonElements;
-}
+import constants from "~/scripts/utils/constants";
+import UtilityFactory from "../utils";
 
 export default class EventHelpers {
     browserStorage: IBrowserUtilities;
-    public static LOCALE = "locale";
+    public static LOCALE = constants.locale;
 
     constructor(storage: IBrowserUtilities) {
         this.browserStorage = storage;
@@ -38,7 +17,7 @@ export default class EventHelpers {
     }
 
 	public getCurrentLocale = (event: ChangeEvent<HTMLSelectElement>): string | null => {
-		return this.browserStorage.getValue("locale");
+		return this.browserStorage.getValue(constants.locale);
 	}
 
     public setCurrentLocale(value: string) {
@@ -46,21 +25,18 @@ export default class EventHelpers {
     }
 
     public redirectToCurrentLocale(locale: string) {
-        const languages = ["de-de", "en-us"];
+        const languages = constants.storyblokLangs;
         let pathname = location.pathname;
         let pathnames = pathname.split("/");
 
         // find the locale used in the location url
-        let pathLocales = findCommonElements(languages, pathnames);
+        let pathLocales = UtilityFactory.findCommonElements(languages, pathnames);
         let pathLocale: string = "";
         let updatedPathname: string = "";
 
         // check if one one language exist in the path
         if (pathLocales.length === 1) {
             pathLocale = pathLocales.join();
-        }
-
-        if (pathLocale !== locale) {
             updatedPathname = pathname.replace(pathLocale, locale);
         }
 

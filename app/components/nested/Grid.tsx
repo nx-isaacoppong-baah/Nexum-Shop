@@ -5,7 +5,7 @@ import type { FC } from "react";
 import {
   List,
   ListItem,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 export const Grid: FC<GridComponentProps> = ({ bloks }: GridComponentProps): JSX.Element => {
   return (

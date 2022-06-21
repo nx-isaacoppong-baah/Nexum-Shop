@@ -1,9 +1,9 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Select, Stack } from '@chakra-ui/react';
+import React from "react";
+import type { FC } from "react";
+import { Select, Stack } from "@chakra-ui/react";
 import ReactCountryFlag from "react-country-flag";
 import { Factory } from "~/scripts/factories";
-import type { CountrySelectorProps } from '~/types';
+import type { CountrySelectorProps } from "~/types";
 
 export const CountrySelector: FC<CountrySelectorProps> = ({ selectedLocale, rendered }
 : CountrySelectorProps): JSX.Element => {

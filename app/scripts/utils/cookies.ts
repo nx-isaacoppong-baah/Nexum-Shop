@@ -15,13 +15,13 @@ export default class CookieUtilities implements IBrowserUtilities {
 
 	public getValue(name: string, defaultCookies: string = ""): string | null {
 		defaultCookies = defaultCookies || document.cookie;
-		let cookies = defaultCookies.split(';');
+		let cookies = defaultCookies.split(";");
 		let nameEQ = name + "=";
 
 		for(let i = 0; i < cookies.length; i++) {
 			let cookie = cookies[i];
 			
-			while (cookie.charAt(0)==' ') {
+			while (cookie.charAt(0)==" ") {
 				cookie = cookie.substring(1, cookie.length);
 			}
 
@@ -34,6 +34,6 @@ export default class CookieUtilities implements IBrowserUtilities {
 	}
 
 	public deleteValue(name: string): void {
-		document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		document.cookie = name +"=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 	}
 }

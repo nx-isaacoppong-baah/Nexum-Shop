@@ -1,9 +1,9 @@
-import { ServerStyleContext, ClientStyleContext } from './context';
-import { ColorModeScript } from '@chakra-ui/react';
-import { withEmotionCache } from '@emotion/react';
-import React, { useContext, useEffect } from 'react';
+import { ServerStyleContext, ClientStyleContext } from "./context";
+import { ColorModeScript } from "@chakra-ui/react";
+import { withEmotionCache } from "@emotion/react";
+import React, { useContext, useEffect } from "react";
 import theme from "./theme";
-import type { DocumentProps } from '~/types';
+import type { DocumentProps } from "~/types";
 
 import {
 	Links,
@@ -36,7 +36,7 @@ export const Document = withEmotionCache(({ children }: DocumentProps, emotionCa
 			{serverStyleData?.map(({ key, ids, css }) => (
 			  <style
 				key={key}
-				data-emotion={`${key} ${ids.join(' ')}`}
+				data-emotion={`${key} ${ids.join(" ")}`}
 				dangerouslySetInnerHTML={{ __html: css }}
 			  />
 			))}
