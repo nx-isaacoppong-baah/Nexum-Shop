@@ -1,7 +1,7 @@
 import type { StoryblokConfig } from "storyblok-js-client";
 
 export declare const getStoryblokApi: GetStoryblokAPI;
-export declare const useStoryblokState: <T = any>(story: T) => T;
+export declare const useStoryblokState: <T = any>(story: T, config?: any) => T;
 export declare const storyblokEditable: <T = any>(blok: T) => T;
 export declare const StoryblokComponent: any;
 

@@ -47,7 +47,7 @@ export type PageComponentProps = {
 }
 
 export type HeaderComponentProps = {
-	links: Array<string>
+	links: Map<string, RefinedCategory>
 	logos: IRefinedLogos
 }
 
@@ -55,3 +55,21 @@ interface ImageProps {
 	src: string
 	alt: string
 }
+
+export interface ICatalogGridComponent extends IBasicStoryFields {
+	categories: ICategoryComponent[]
+	columns?: ICategoryComponent[]
+}
+
+export interface ICategoryComponent extends IBasicStoryFields {
+	id: string
+	name?: string
+	full_slug?: string
+}
+
+export type CountrySelectorProps = {
+	selectedLocale: string
+	rendered: boolean
+}
+
+export type RefinedCategory = Partial<Pick<ICategoryComponent, "name" | "full_slug" | "_editable" | "_uid">>

@@ -2,6 +2,7 @@ import { getStoryblokApi } from "@storyblok/react";
 import { StoriesEndpoints } from "~/enums";
 import Utilities from "~/scripts/utils";
 import StoryHelpers from "~/scripts/helpers/story";
+import CookieUtilities from "~/scripts/utils/cookies";
 
 import type {
   StoryAPIQueryParams,
@@ -31,5 +32,17 @@ export default class LoaderHelper {
 		story.content = StoryHelpers.mapStoryContent<IPageStoryContent>(story);
 
 		return story;
+	}
+
+	public static getCurrentLocalFromCookies(request: Request): string | null {
+		const cookieUtilities = new CookieUtilities();
+		const cookieHeader = request.headers.get("Cookie");
+		let cookie: string | null = null;
+	  
+		if (cookieHeader) {
+		  cookie = cookieUtilities.getValue("locale", cookieHeader);
+		}
+
+		return cookie;
 	}
 }

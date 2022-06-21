@@ -3,7 +3,7 @@ import { ColorModeScript } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
 import React, { useContext, useEffect } from 'react';
 import theme from "./theme";
-import type { DocumentProps } from './types';
+import type { DocumentProps } from '~/types';
 
 import {
 	Links,
@@ -13,23 +13,17 @@ import {
 	ScrollRestoration
  } from "@remix-run/react";
 
-
-export const Document = withEmotionCache(
-	({ children }: DocumentProps, emotionCache) => {
+export const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) => {
 	  const serverStyleData = useContext(ServerStyleContext);
 	  const clientStyleData = useContext(ClientStyleContext);
   
-	  // Only executed on client
 	  useEffect(() => {
-		// re-link sheet container
 		emotionCache.sheet.container = document.head;
-		// re-inject tags
 		const tags = emotionCache.sheet.tags;
 		emotionCache.sheet.flush();
 		tags.forEach((tag) => {
 		  (emotionCache.sheet as any)._insertTag(tag);
 		});
-		// reset cache to reapply global styles
 		clientStyleData?.reset();
 	  // eslint-disable-next-line react-hooks/exhaustive-deps
 	  }, []);

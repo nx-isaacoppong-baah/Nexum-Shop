@@ -1,5 +1,5 @@
 {
-  "name": "nexum-shop",
+  "name": "nexum-post",
   "private": false,
   "sideEffects": false,
   "scripts": {
@@ -31,12 +31,15 @@
     "framer-motion": "^6.3.11",
     "morgan": "^1.10.0",
     "react": "^18.2.0",
+    "react-country-flag": "^3.0.2",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
     "tiny-invariant": "^1.2.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.5.1",
     "@remix-run/eslint-config": "^1.5.1",
+    "@types/i18next-fs-backend": "^1.1.2",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "eslint": "^8.15.0",

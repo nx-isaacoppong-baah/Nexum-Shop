@@ -5,14 +5,12 @@ import { Box, useColorModeValue } from "@chakra-ui/react";
 import type { PageComponentProps } from "~/types";
 import ComponentHelpers from "~/scripts/helpers/components";
 
-// This component is not from storyblok
 import { Header } from "../internal/Header";
 
 
 export const Page: FC<PageComponentProps> = ({ blok }: PageComponentProps): JSX.Element => {
-	const links = ["Partners", "Products", "Blog", "FAQ"];
-
-  let { logoComponent, features, teaser } = ComponentHelpers.processHomepageBloks(blok.body);
+	const refinedLinks = ComponentHelpers.getHeaderLinks(blok.body);
+  const { logoComponent, features, teaser } = ComponentHelpers.processHomepageBloks(blok.body);
   const refinedImages = ComponentHelpers.refineImages(logoComponent.logos);
   const refinedLogos = ComponentHelpers.refineLogoComponent(logoComponent, refinedImages);
 
@@ -20,7 +18,7 @@ export const Page: FC<PageComponentProps> = ({ blok }: PageComponentProps): JSX.
     <>
         {/* Header */}
         <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-          <Header links = { links } logos = { refinedLogos } />
+          <Header links = { refinedLinks } logos = { refinedLogos } />
         </Box>
 
         {/* Main */}

@@ -43,8 +43,14 @@ export type {
 	GridComponentProps,
 	IGridComponent,
 	PageComponentProps,
-	HeaderComponentProps
+	HeaderComponentProps,
+	ICatalogGridComponent,
+	ICategoryComponent,
+	RefinedCategory,
+	CountrySelectorProps
 } from "./component";
+
+export type { IBrowserUtilities } from "./storage";
 
 export interface ServerStyleContextData {
 	key: string
@@ -56,6 +62,10 @@ export interface ClientStyleContextData {
 	reset: () => void
 }
 
-export interface DocumentProps {
+export interface ClientCacheProviderProps {
 	children: React.ReactNode;
+}
+
+export interface DocumentProps {
+	children: React.ReactNode
 }

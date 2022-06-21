@@ -4,7 +4,9 @@ import type {
 	IBasicStoryFields,
 	IFeatureComponent,
 	ITeaserComponent,
-	IRefinedLogos
+	IRefinedLogos,
+	ICatalogGridComponent,
+	RefinedCategory
 } from "~/types";
 import { Themes } from "~/enums";
 
@@ -65,6 +67,24 @@ export default class ComponentHelpers {
 			_editable: component._editable,
 			component: component.component
 		});
+	}
+
+	public static getHeaderLinks(bloks: any[]): Map<string, RefinedCategory> {
+		const catalog: ICatalogGridComponent = bloks.find(blok => blok.component === "grid"
+			&&  blok.categories?.length);
+
+		const refinedCategories = new Map<string, RefinedCategory>();
+		
+		catalog.categories.forEach(category => {
+			refinedCategories.set(category.id, {
+				full_slug: category.full_slug ?? "",
+				_editable: category._editable,
+				name: category.name,
+				_uid: category._uid
+			})
+		});
+
+		return refinedCategories;
 	}
 
 	private static processHomepageLogo (blok: ILogoComponent) {

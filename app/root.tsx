@@ -4,9 +4,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Outlet } from "@remix-run/react";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 
-import { Document } from "./document";
-import theme from "./theme";
-
 import { Feature } from "./components/nested/Feature";
 import { Grid } from "./components/nested/Grid";
 import { Teaser } from "./components/nested/Teaser";
@@ -14,7 +11,24 @@ import { Page } from "./components/content-types/Page";
 import { Product } from "./components/content-types/Product";
 import { Logos } from "./components/nested/Logos";
 
+import { Document } from "~/document";
+import theme from "~/theme";
 import { process } from "../.env";
+
+const components = {
+  feature: Feature,
+  grid: Grid,
+  teaser: Teaser,
+  page: Page,
+  Product: Product,
+  logos: Logos
+}
+
+storyblokInit({
+  accessToken: process.env.PREVIEW_ACCESS_TOKEN,
+  use: [apiPlugin],
+  components
+});
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -36,21 +50,6 @@ export const links: LinksFunction = () => {
     { rel: "manifest", href: "/favicon_io/site.webmanifest" }
   ]
 }
-
-const components = {
-  feature: Feature,
-  grid: Grid,
-  teaser: Teaser,
-  page: Page,
-  Product: Product,
-  logos: Logos
-}
-
-storyblokInit({
-  accessToken: process.env.PREVIEW_ACCESS_TOKEN,
-  use: [apiPlugin],
-  components
-});
 
 export default function App() {
   return (
