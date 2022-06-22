@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 import type { IBrowserUtilities } from "~/types";
-import constants from "~/scripts/utils/constants";
-import UtilityFactory from "../utils";
+import constants from "~/scripts/factories/constants";
+import algorithms from "../utils/algorithms";
 
 export default class EventHelpers {
     browserStorage: IBrowserUtilities;
@@ -25,12 +25,13 @@ export default class EventHelpers {
     }
 
     public redirectToCurrentLocale(locale: string) {
-        const languages = constants.storyblokLangs;
+        // TODO: Make this array dynamic
+        const languages = ["en-us", "de-de"];
         let pathname = location.pathname;
         let pathnames = pathname.split("/");
 
         // find the locale used in the location url
-        let pathLocales = UtilityFactory.findCommonElements(languages, pathnames);
+        let pathLocales = algorithms.findCommonElements(languages, pathnames);
         let pathLocale: string = "";
         let updatedPathname: string = "";
 

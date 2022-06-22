@@ -2,24 +2,24 @@ import { json } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useStoryblokState, StoryblokComponent } from "@storyblok/react";
-import { StoryVersions } from "~/enums";
-import type { StoryAPIQueryParams, Story } from "~/types";
-import LoaderHelper from "~/scripts/helpers/loader";
+import Factory from "~/scripts/factories/home";
+import HomepageLoader from "~/scripts/loaders/home";
 
-export const loader: LoaderFunction = async ({ params }) => {
-	const slug = params?.deSlug ?? "startseite";
-	const sbApiOptions: StoryAPIQueryParams = {
+import type { PageResponseData, APIQueryParams } from "~/types";
+import { StoryVersions, Languages } from "~/enums";
+
+export const loader: LoaderFunction = async ({ params, request }) => {  
+	const sbApiOptions: APIQueryParams = {
 		version: StoryVersions.draft,
-		language: "de-de",
+		language: Languages.germanGerman
 	};
-  
-	const story = await LoaderHelper.processHomepageLoader(slug, sbApiOptions);
 
-	return json(story);
+	const response = await HomepageLoader.getLoaderData(params, sbApiOptions, Factory);
+	return json<PageResponseData>(response);
 };
 
 export default function Page() {
-	let story = useLoaderData<Story>();
+	let { story, space } = useLoaderData<PageResponseData>();
 	story = useStoryblokState(story);
 
 	return (

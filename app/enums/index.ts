@@ -4,8 +4,8 @@ export enum StoryVersions {
 };
 
 export enum StoriesEndpoints {
-	__init__ = "cdn/stories",
-	products = "cdn/stories/Main-product/"
+	stories = "cdn/stories",
+	spaces = "cdn/spaces/me"
 };
 
 export enum Themes {
@@ -14,3 +14,7 @@ export enum Themes {
 	system = "system"
 }
 
+export enum Languages {
+	englishUS = "en-us",
+	germanGerman = "de-de"
+}

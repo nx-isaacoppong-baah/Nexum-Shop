@@ -1,4 +1,4 @@
-export default class UtilityFactory {
+export default class AlgosFactory {
 	/**
 	 * Algorithm to remove trailing slashes from urls
 	 * @param url the string

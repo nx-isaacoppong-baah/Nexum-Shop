@@ -1,12 +1,9 @@
-import type { Story, IBasicStoryFields } from "../story";
+import type { StoryDecoratedContent, IBasicStoryFields } from "../story";
+import type { Space } from "../space";
 
-export type PageResponseRawData = {
-	data: {
-		story: Story,
-		cv: number
-		rels: string[]
-		links: string[]
-	}
+export type PageResponseData = {
+	story: StoryDecoratedContent | any
+	space: Space | any
 }
 
 export interface IPageStoryContent extends IBasicStoryFields {

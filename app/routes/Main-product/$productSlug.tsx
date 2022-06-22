@@ -2,48 +2,26 @@ import { json } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-
-import {
-  getStoryblokApi,
-  useStoryblokState,
-  StoryblokComponent
-} from "@storyblok/react";
-
-import type {
-  ProductResponseRawData,
-  IProductStoryContent,
-  Story,
-  StoryAPIQueryParams
-} from "~/types";
-
-import {
-  StoryVersions,
-  StoriesEndpoints
-} from "~/enums";
-
-import Utilities from "~/scripts/utils";
-import StoryHelpers from "~/scripts/helpers/story";
+import Factory from "~/scripts/factories/home";
+import { useStoryblokState, StoryblokComponent } from "@storyblok/react";
+import type { Story, APIQueryParams } from "~/types";
+import { StoryVersions } from "~/enums";
 
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.productSlug, `params.productSlug is required`);
 
-  const slug: string = params.productSlug;
-  const productsEndpoint = Utilities.removeTrailingSlash(StoriesEndpoints.products);
+  // const slug: string = params.productSlug;
+  // const sbApiOptions: APIQueryParams = { version: StoryVersions.draft };
 
-  const path: string = `${productsEndpoint}/${slug}`;
-  const sbApiOptions: StoryAPIQueryParams = { version: StoryVersions.draft }
-  
-  const storyblokApi = getStoryblokApi();
-  const response = await storyblokApi.get<ProductResponseRawData>(path, sbApiOptions);
+	// const unresolvedResponse = Factory.loaderProcessor()
+  //   .processHomepageLoaderRequests(slug, sbApiOptions);
+	// const resolvedResponse = await Promise.all(unresolvedResponse);
+	// const response = Factory.loaderProcessor()
+	// 	.processHomepageLoaderResponse(resolvedResponse);
 
-  if (!response.data) {
-    throw new Response("Not Found", { status: 404 });
-  }
+  // response.story = Factory.storyModeller(response.story).story;
 
-  const story: Story = response.data.story;
-  story.content = StoryHelpers.mapStoryContent<IProductStoryContent>(story);
-
-  return json(story);
+	return json({ story: {} });
 };
 
 export default function Product() {

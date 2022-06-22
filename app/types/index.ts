@@ -1,19 +1,4 @@
-import type { StoryVersions } from "../enums";
-
-export type StoryAPIQueryParams = {
-	version: StoryVersions
-	starts_with?: string
-	by_uuids?: string // eg: starts_with=products/MEGASHOP001 || starts_with=en/posts
-	by_slugs?: string // eg: by_slugs=authors/john,authors/max || by_slugs=authors/*,articles/*
-	sort_by?: string // eg: content.YOUR_FIELD:asc || created_at:desc
-	page?: number // for pagination, default is 1
-	per_page?: number // for pagination, default is 25 and max is 100
-	language?: string
-	fallback_lang?: string
-}
-
 export type {
-	ProductResponseRawData,
 	AllProductsResponseRawData,
 	IProductStoryContent,
 	ProductListingProps
@@ -21,15 +6,22 @@ export type {
 
 export type {
 	Story,
+	StoryDecoratedContent,
+	StoryResponseRawData,
 	IStoryContent,
 	IBasicStoryFields
 } from "./story";
+
+export type {
+	Space,
+	SpaceResponseRawData
+} from "./space";
 
 export type { IImageFieldType } from "./field";
 
 export type {
 	IPageStoryContent,
-	PageResponseRawData
+	PageResponseData
 } from "./data/page";
 
 export type {
@@ -52,20 +44,12 @@ export type {
 
 export type { IBrowserUtilities } from "./storage";
 
-export interface ServerStyleContextData {
-	key: string
-	ids: Array<string>
-	css: string
-}
+export type {
+	APIQueryParams,
+	ServerStyleContextData,
+	ClientStyleContextData,
+	ClientCacheProviderProps,
+	DocumentProps
+} from "./common";
 
-export interface ClientStyleContextData {
-	reset: () => void
-}
-
-export interface ClientCacheProviderProps {
-	children: React.ReactNode;
-}
-
-export interface DocumentProps {
-	children: React.ReactNode
-}
+export type { IServicesAPIs } from "./services";

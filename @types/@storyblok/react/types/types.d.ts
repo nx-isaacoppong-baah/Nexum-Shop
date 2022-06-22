@@ -17,9 +17,9 @@ export interface SbSDKOptions {
 }
 
 export interface SbAPIResponse {
-    get: <T = any>(path: string, options: SbAPIOptions) => Promise<T>
+    get: <T = any>(path: string, options?: SbAPIOptions) => Promise<T>
 }
 
 export interface SbAPIOptions {
-    version: string
+    version?: string
 }

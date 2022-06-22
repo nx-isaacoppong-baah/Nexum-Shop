@@ -6,9 +6,9 @@ import { Themes } from "~/enums";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { NavLink } from "~/components/internal/NavLink";
 
-import CookieUtilities from "~/scripts/utils/cookies";
+import CookieUtilities from "~/scripts/services/cookies";
 import { CountrySelector } from "./CountrySelector";
-import constants from "~/scripts/utils/constants";
+import constants from "~/scripts/factories/constants";
 
 import {
   Box,

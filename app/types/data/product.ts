@@ -1,15 +1,6 @@
 import type { Story, IBasicStoryFields } from "../story";
 import type { IImageFieldType } from "../field";
 
-export type ProductResponseRawData = {
-	data: {
-		story: Story,
-		cv: number
-		rels: string[]
-		links: string[]
-	}
-}
-
 export type AllProductsResponseRawData = {
 	data: {
 		stories: Story[]
