@@ -1,14 +1,11 @@
-import { StoryblokComponent } from "@storyblok/react";
+import React from "react";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
+import { StoryblokComponent } from "@storyblok/react";
 import type { HeaderComponentProps } from "~/types";
 import { Themes } from "~/enums";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { NavLink } from "~/components/internal/NavLink";
-
-import CookieUtilities from "~/scripts/services/cookies";
+import { Category } from "~/components/nested/Category";
 import { CountrySelector } from "./CountrySelector";
-import constants from "~/scripts/factories/constants";
 
 import {
   Box,
@@ -32,20 +29,6 @@ export const Header: FC<HeaderComponentProps> = ({ logos, links }: HeaderCompone
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { colorMode, toggleColorMode } = useColorMode();
 
-	let [selectedLocale, getSelectedLocale] = useState("");
-	let [rendered, isDoneRendering] = useState(false);
-
-	useEffect(() => {
-		const cookieUtilities = new CookieUtilities();
-		const locale = cookieUtilities.getValue(constants.locale);
-
-		if (locale) {
-			getSelectedLocale(locale);
-		}
-
-		isDoneRendering(true);
-	}, [])
-
 	return (
 	<>
 		<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
@@ -57,13 +40,13 @@ export const Header: FC<HeaderComponentProps> = ({ logos, links }: HeaderCompone
 				<HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
 					{
 						Array.from(links.values()).map((link) => (
-							<NavLink key = { link._uid } link = { link }> { link } </NavLink>
+							<Category key = { link._uid } link = { link }> { link } </Category>
 						))
 					}
 				</HStack>
 			</HStack>
 			<Flex alignItems={"center"}>
-				<CountrySelector selectedLocale={selectedLocale} rendered={rendered} />
+				<CountrySelector />
 				<Button onClick={toggleColorMode}>
 					{ colorMode === Themes.light ? <MoonIcon w={6} h={6} /> : <SunIcon w={6} h={6} /> }
 				</Button>
@@ -88,7 +71,7 @@ export const Header: FC<HeaderComponentProps> = ({ logos, links }: HeaderCompone
 					<Stack as={"nav"} spacing={4}>
 						{
 							Array.from(links.values()).map((link) => (
-								<NavLink key = { link._uid } link = { link }> { link } </NavLink>
+								<Category key = { link._uid } link = { link }> { link } </Category>
 							))
 						}
 					</Stack>

@@ -4,7 +4,7 @@ const path = require("path");
 
 const platform = process.platform;
 const httpHost = "127.0.0.1:3010";
-const httpsHost = "0.0.0.0:3020";
+const httpsHost = "0.0.0.0:3030";
 const certificatePath = path.join(__dirname, "certificates");
 const publicKeyPath = path.join(certificatePath, "cert.pem");
 const privateKeyPath = path.join(certificatePath, "key.pem");

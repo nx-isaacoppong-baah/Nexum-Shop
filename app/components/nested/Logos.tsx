@@ -6,6 +6,7 @@ import { Themes } from "~/enums";
 
 
 export const Logos: FC<LogoComponentProps> = ({ blok }: LogoComponentProps): JSX.Element => {
+	console.log(blok)
 	const { colorMode } = useColorMode();
 	return (
 		<>

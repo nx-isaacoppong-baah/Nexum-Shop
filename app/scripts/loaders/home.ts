@@ -8,7 +8,7 @@ import constants from "~/scripts/factories/constants";
 
 export default class HomepageLoader {
 	public static async getLoaderData(params: Params, queries: APIQueryParams, factory: any) {
-		const slug = params?.slug ?? constants.homepageEnglish;
+		const slug = params?.slug ?? constants.homepageFallback;
 	  
 		const unresolvedResponse = factory.loaderProcessor().processHomepageLoaderRequests(slug, queries);
 		const resolvedResponse = await Promise.all(unresolvedResponse);

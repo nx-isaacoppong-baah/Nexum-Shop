@@ -1,38 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { FC } from "react";
 import { Select, Stack } from "@chakra-ui/react";
 import ReactCountryFlag from "react-country-flag";
-import Factory from "~/scripts/factories/home";
-import type { CountrySelectorProps } from "~/types";
+import { useLoaderData } from "@remix-run/react";
 
-export const CountrySelector: FC<CountrySelectorProps> = ({ selectedLocale, rendered }
-: CountrySelectorProps): JSX.Element => {
+import type { PageResponseData } from "~/types";
+import { Languages } from "~/enums";
+import Factory from "~/scripts/factories/home";
+import CookieUtilities from "~/scripts/services/cookies";
+import constants from "~/scripts/factories/constants";
+import algorithms from "~/scripts/utils/algorithms";
+
+export const CountrySelector: FC = (): JSX.Element => {
+	let { space } = useLoaderData<PageResponseData>();
+	const languages = space.languages;
+	const languagesCodes = space.language_codes as string[];
+
+	const [languageSelected, setLanguage] = useState("");
+	const [rendered, isRendered] = useState(false);
+
+	useEffect(() => {
+		const cookieUtilities = new CookieUtilities();
+		const locale = cookieUtilities.getValue(constants.locale);
+
+		if (locale) {
+			setLanguage(locale);
+		}
+
+		isRendered(true);
+	}, [])
+
 	return(
-		<Stack spacing={4}>
-			{
-				rendered && !selectedLocale &&
-				<Select onChange = { Factory.browserCookies().setCurrentLocaleAndRedirect } size="md">
-					<option value=""> Default </option>
-					<option value="en-us"> <ReactCountryFlag countryCode="US" /> English </option>
-					<option value="de-de"> <ReactCountryFlag countryCode="DE" /> German </option>
-				</Select>
-			}
-			{
-				(rendered && selectedLocale === "en-us") &&
-				<Select onChange = { Factory.browserCookies().setCurrentLocaleAndRedirect } size="md">
-					<option value="en-us"> <ReactCountryFlag countryCode="US" /> English </option>
-					<option value="de-de"> <ReactCountryFlag countryCode="DE" /> German </option>
-					<option value=""> Default </option>
-				</Select>
-			}
-									{
-				(rendered && selectedLocale === "de-de") &&
-				<Select onChange = { Factory.browserCookies().setCurrentLocaleAndRedirect } size="md">
-					<option value="de-de"> <ReactCountryFlag countryCode="DE" /> German </option>
-					<option value="en-us"> <ReactCountryFlag countryCode="US" /> English </option>
-					<option value=""> Default </option>
-				</Select>
-			}
+		<Stack spacing={4}>				
+			<Select defaultValue={Languages.default} onChange = { Factory.browserCookies().setCurrentLocaleAndRedirect.bind(this, languagesCodes) } size="md">
+				{
+					languagesCodes.map(languageCode => (
+						<option value={languageCode} selected={rendered && languageSelected === languageCode ? true : false} key={languageCode}>
+							<ReactCountryFlag countryCode={algorithms.removeBrackets(languages[languageCode])} />
+							{" " + languages[languageCode]}
+						</option>
+					))
+				}
+			</Select>
 		</Stack>
 	)
 }

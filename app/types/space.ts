@@ -3,8 +3,8 @@ export type Space = {
 	name: string
 	domain: string
 	version: number
-	language_codes?: string[]
-	languages?: string[]
+	language_codes: string[]
+	languages?: Object
 }
 
 export type SpaceResponseRawData = {

@@ -3,7 +3,7 @@ import { storyblokEditable } from "@storyblok/react";
 import { Link, useColorModeValue } from "@chakra-ui/react";
 import type { RefinedCategory } from "~/types";
 
-export const NavLink: FC<{ link: RefinedCategory }> = ({ link }
+export const Category: FC<{ link: RefinedCategory }> = ({ link }
 : { link: RefinedCategory }): JSX.Element => {
 	return (
 		<Link {...storyblokEditable(link)}

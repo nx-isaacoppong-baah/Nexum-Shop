@@ -11,9 +11,9 @@ export default class EventHelpers {
         this.browserStorage = storage;
     }
 
-	public setCurrentLocaleAndRedirect = (event: ChangeEvent<HTMLSelectElement>) => {
+	public setCurrentLocaleAndRedirect = (languageCodes: any, event: ChangeEvent<HTMLSelectElement>) => {
         this.setCurrentLocale(event.target.value);
-        this.redirectToCurrentLocale(event.target.value);
+        this.redirectToCurrentLocale(event.target.value, languageCodes);
     }
 
 	public getCurrentLocale = (event: ChangeEvent<HTMLSelectElement>): string | null => {
@@ -24,9 +24,8 @@ export default class EventHelpers {
         this.browserStorage.setValue(EventHelpers.LOCALE, value);
     }
 
-    public redirectToCurrentLocale(locale: string) {
-        // TODO: Make this array dynamic
-        const languages = ["en-us", "de-de"];
+    public redirectToCurrentLocale(locale: string, languageCodes: any) {
+        const languages = languageCodes;
         let pathname = location.pathname;
         let pathnames = pathname.split("/");
 

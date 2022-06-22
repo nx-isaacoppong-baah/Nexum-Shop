@@ -8,7 +8,7 @@ import HomepageLoader from "~/scripts/loaders/home";
 import type { PageResponseData, APIQueryParams } from "~/types";
 import { StoryVersions, Languages } from "~/enums";
 
-export const loader: LoaderFunction = async ({ params, request }) => {  
+export const loader: LoaderFunction = async ({ params }) => {  
 	const sbApiOptions: APIQueryParams = {
 		version: StoryVersions.draft,
 		language: Languages.germanGerman
@@ -19,7 +19,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 };
 
 export default function Page() {
-	let { story, space } = useLoaderData<PageResponseData>();
+	let { story } = useLoaderData<PageResponseData>();
 	story = useStoryblokState(story);
 
 	return (

@@ -18,7 +18,7 @@ export default class AlgosFactory {
 	 * @param arrayTwo Second array
 	 * @returns the common elements
 	 */
-	public static findCommonElements (arrayOne: any[], arrayTwo: any[]) {
+	public static findCommonElements (arrayOne: any[], arrayTwo: any[]): any[] {
 		let commonElementsDictionary = new Map<string, boolean>();
 		let commonElements = [];
 	
@@ -40,4 +40,10 @@ export default class AlgosFactory {
 	
 		return commonElements;
 	}
+
+	public static removeBrackets (value: string): string {
+		if (!value) return "";
+
+		let trimmed = value.split("(")[1]?.trim();
+		return trimmed?.substring(0, trimmed?.lastIndexOf(")"));	}
 }

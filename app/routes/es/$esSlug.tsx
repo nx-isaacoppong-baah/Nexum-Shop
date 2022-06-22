@@ -9,20 +9,20 @@ import type { PageResponseData, APIQueryParams } from "~/types";
 import { StoryVersions, Languages } from "~/enums";
 
 export const loader: LoaderFunction = async ({ params }) => {  
-  const sbApiOptions: APIQueryParams = {
+	const sbApiOptions: APIQueryParams = {
 		version: StoryVersions.draft,
-    language: Languages.englishUS
+		language: Languages.spanish
 	};
-  
-  const response = await HomepageLoader.getLoaderData(params, sbApiOptions, Factory);
-  return json<PageResponseData>(response);
+
+	const response = await HomepageLoader.getLoaderData(params, sbApiOptions, Factory);
+	return json<PageResponseData>(response);
 };
 
 export default function Page() {
-  let { story } = useLoaderData<PageResponseData>();
-  story = useStoryblokState(story);
+	let { story } = useLoaderData<PageResponseData>();
+	story = useStoryblokState(story);
 
-  return (
-    <StoryblokComponent blok = { story.content.blok } />
-  )
+	return (
+		<StoryblokComponent blok = { story.content.blok } />
+	)
 }

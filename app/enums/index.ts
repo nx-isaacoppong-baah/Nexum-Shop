@@ -15,6 +15,8 @@ export enum Themes {
 }
 
 export enum Languages {
+	default = "",
 	englishUS = "en-us",
-	germanGerman = "de-de"
+	germanGerman = "de-de",
+	spanish = "es"
 }

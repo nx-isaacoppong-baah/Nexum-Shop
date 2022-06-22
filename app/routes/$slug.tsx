@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 };
 
 export default function Page() {
-  let { story, space } = useLoaderData<PageResponseData>();
+  let { story } = useLoaderData<PageResponseData>();
   story = useStoryblokState(story);
 
   return (
